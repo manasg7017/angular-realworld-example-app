@@ -1,34 +1,31 @@
 pipeline {
-    agent any
-
-    environment {
-        NODE_HOME = tool name: 'NodeJS', type: 'nodejs' // Ensure NodeJS is configured
-        PATH = "${NODE_HOME}/bin:${env.PATH}" // Update PATH to include Node.js
+    agent {
+        docker {
+            image 'node:14' // Use a Node.js Docker image
+            label 'node'
+            args '-u root:root' // Optional: run as root if needed
+        }
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the repository
-                git branch: 'main', url: 'https://github.com/manasg7017/angular-realworld-example-app.git'
+                // Checkout the code from the new repository
+                git 'https://github.com/GabrielToth/Angular-V17-Template.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install npm dependencies
-                    sh 'npm ci' // Use npm ci for faster installation
-                }
+                // Install npm dependencies
+                sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    // Build the Angular application
-                    sh 'npm run build --prod'
-                }
+                // Build the Angular application
+                sh 'ng build --prod'
             }
         }
 
