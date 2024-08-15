@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the new repository
-                git 'https://github.com/GabrielToth/Angular-V17-Template.git'
+                git 'https://github.com/IBM/template-node-angular.git'
             }
         }
 
