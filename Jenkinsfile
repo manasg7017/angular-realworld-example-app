@@ -14,6 +14,9 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                sh 'echo "Node version:" && node -v'
+                sh 'echo "NPM version:" && npm -v'
+                sh 'echo "PATH is: ${PATH}"'
                 sh 'npm install'
             }
         }
