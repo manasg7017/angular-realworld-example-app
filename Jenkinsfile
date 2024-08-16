@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "${env.PATH}:/usr/bin"  // Ensure /usr/bin is in the PATH
+    }
+
     stages {
         stage('Checkout') {
             steps {
