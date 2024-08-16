@@ -1,31 +1,25 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14' // Use a Node.js Docker image
-            label 'node'
-            args '-u root:root' // Optional: run as root if needed
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the new repository
+                // Check out the code from the specified Git repository
                 git 'https://github.com/IBM/template-node-angular.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Install npm dependencies
+                // Install the necessary dependencies
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                // Build the Angular application
-                sh 'ng build --prod'
+                // Build the Angular project in production mode
+                sh 'npx ng build --prod' // Use npx to ensure Angular CLI is available
             }
         }
 
