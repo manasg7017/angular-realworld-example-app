@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/manasg7017/angular-realworld-example-app.git'
+                git branch: 'main', url: 'https://github.com/manasg7017/angular-realworld-example-app.git'
             }
         }
 
