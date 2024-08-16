@@ -4,28 +4,24 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out the code from the specified Git repository
-                git 'https://github.com/IBM/template-node-angular.git'
+                git 'https://github.com/manasg7017/angular-realworld-example-app.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Install the necessary dependencies
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                // Build the Angular project in production mode
-                sh 'npx ng build --prod' // Use npx to ensure Angular CLI is available
+                sh 'ng build --prod'
             }
         }
 
         stage('Archive') {
             steps {
-                // Archive the build artifacts
                 archiveArtifacts artifacts: 'dist/**', fingerprint: true
             }
         }
